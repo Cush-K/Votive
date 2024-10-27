@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect } from "react";
+import Navbar from "./Navbar";
+import SwipeImages from "./Swiper";
+import Hero from "./Hero";
+import Plans from "./Plans";
+import HowItWorks from "./HowItWorks";
+import Footer from "./Footer";
+
 
 function App() {
+  useEffect(() => {
+    document.title = 'Laundry At Your Doorstep | Votive Laundry and Dry Cleaning | Kiambu Road';
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Hero />
+      <SwipeImages />
+      <Plans />
+      <HowItWorks />
+      <Footer />
     </div>
   );
 }

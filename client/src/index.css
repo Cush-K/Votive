@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,8 +12,548 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.App{
+  margin-top: 10em;
+}
+/* General Navbar styling */
+.navbar {
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for hiding/showing */
+  width: 100vw;
+  z-index: 100; 
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  background-color: rgba(247, 244, 244, 0.8); /* Adjust background color for better visibility */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navbar.hidden {
+  transform: translateY(-100%); /* Slide the navbar up out of view */
+  opacity: 0; /* Optional: fade out effect */
+}
+
+.navbar.visible {
+  transform: translateY(0); /* Keep the navbar visible */
+  opacity: 1; /* Ensure it's fully visible */
+}
+.nav-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  padding-bottom: 20px;
+}
+.logo {
+  width: 250px;
+}
+.contact {
+  display: flex;
+  align-items: center;
+}
+.contact h1 {
+  margin-left: 10px;
+  font-size: 35px;
+  font-weight: bold;
+  color: #373435; /* Dark grey color from logo */
+}
+.socials {
+  display: flex;
+  gap: 15px;
+}
+.icon {
+  color: #00A859; /* Main green color */
+  font-size: 35px;
+  cursor: pointer;
+}
+.phone-icon, .whatsapp-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+.nav-menu {
+  border-top: 1px solid #ece9e9;
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+}
+.nav-menu a {
+  position: relative;
+  text-decoration: none;
+  padding: 10px 20px;
+  color: #373435; /* Dark text */
+  transition: all 0.3s ease;
+  font-family: 'Zilla Slab', serif;
+  font-size: 20px;
+  font-weight: 600;
+  font-style: italic;
+  border-radius: 4em;
+}
+.nav-menu a:hover {
+  background-color: #b5eed3;
+  color: #000;
+}
+.nav-menu a.active {
+  background-color: #00A859; /* Main green color */
+  color: #fff; /* White text */
+}
+.nav-menu a.active::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 50px solid #00A859; /* Triangle using border */
+  border-right: 10px solid transparent; /* Pointy triangle effect */
+}
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+}
+.nav-menu li {
+  display: inline-block;
+}
+/* General Layout */
+.hero-section {
+  position: relative;
+  width: 100vw;
+  background-image: url('/public/images/Hero.png');
+  background-size: cover;
+  background-position: center;
+  padding: 10px 0;
+}
+
+.hero-header {
+  width: 60vw; /* Matches the width of the hero section */
+  margin: 0 auto 40px auto; /* Centers the H1 */
+  text-align: center;
+}
+
+.hero-header h1 {
+  color: white;
+  font-size: 2.5em;
+  font-family: 'Libre Baskerville', serif;
+  /* font-weight:bold; */
+  font-style: italic;
+  margin: 1.2em 0;
+}
+
+/* Hero Boxes Container */
+.hero-boxes {
+  display: flex;
+  justify-content: space-around;
+  width: 60vw;
+  margin: 0 auto;
+}
+
+/* Individual Hero Box */
+.hero-box {
+  background-color: black;
+  color: green;
+  padding: 10px;
+  width: 30%;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  transition: transform 0.3s ease; 
+}
+.hero-box.hero-time p{
+  font-size: 12px;
+}
+/* Icon */
+.hero-icon {
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 10px;
+}
+
+/* Text inside hero box */
+.hero-box h4 {
+  color: white;
+  font-size: 15px;
+  margin: 10px 0;
+  transition: transform 0.3s ease-in-out; 
+  font-family: 'Libre Baskerville', serif;
+}
+.hero-box p {
+  margin: 10px 0;
+  transition: transform 0.3s ease-in-out; 
+  font-family: 'Libre Baskerville', serif;
+  font-size: 13px;
+  color: #31e28f;
+}
+
+/* Hidden Button */
+.hero-btn {
+  opacity: 0;
+  background-color: #14b148;
+  border-radius: 4em;
+  padding: 3px 15px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  align-self: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Hover effect: Text moves up, button appears */
+.hero-box:hover h4,
+.hero-box:hover p {
+  transform: translateY(-10px);
+}
+
+.hero-box:hover .hero-btn {
+  opacity: 1; 
+  transform: translateY(10px); 
+}
+
+.hero-btn:hover {
+  background-color: rgb(39, 185, 105);
+  color: white;
+}
+.mySwiper{
+  background-color: #00A859;
+}
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  opacity: 0;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  transform: translateY(-100%); /* Hidden initially above the image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container:hover .hover-overlay {
+  transform: translateY(0); /* Slide down to cover the image */
+  opacity: 1;
+}
+
+.overlay-buttons {
+  display: flex;
+  gap: 15px; /* Spacing between the buttons */
+}
+
+.like-btn, .share-btn {
+  background-color: rgba(0,0,0,0); 
+  border: none;
+  padding: 10px;
+  /* border-radius: 50%; */
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  /* transition: background-color 0.3s ease; */
+}
+
+.like-btn:hover, .share-btn:hover {
+  /* background-color: #00A859;  */
+  color: rgb(255, 0, 0);
+}
+.plans-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-image: url('/public/images/room.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; /* Enables parallax effect */
+  height: auto;
+}
+
+.plans-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70vw;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 2em;
+  text-align: center;
+}
+.plans-container h1{
+  font-size: 3em;
+  font-family: "Libre Baskerville", serif;
+  color: #34e970;
+}
+.plans-container p{
+  font-size: 15px;
+  color: white;
+  font-family: "Libre Baskerville", serif;
+}
+.plans-boxes {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; 
+  width: 100%;
+  margin-top: 20px;
+}
+
+.plans {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color:rgba(0, 0, 0, 0);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 30%;
+  transition: transform 0.3s ease;
+}
+.plans img {
+  width: auto;
+  height: auto;
+}
+.plans p {
+  margin: 10px 0;
+  list-style: none;
+  font-size: 18px;
+  width: 10em;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 700;
+  font-style: italic;
+  text-align: left;
+}
+.plans button {
+  margin-top: 15px;
+  background-color: #34e970;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border-radius: 4em;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.plans button:hover {
+  background-color: #0f8e37;
+  color: white;
+}
+.plans.visible .plan-item {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.plans p {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.plans.visible p {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.plan-item {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.tick-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #34e970; /* Green background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  content: '✔'; /* Tick mark content */
+}
+
+.tick-mark::before {
+  content: '✔'; /* Tick mark character */
+}
+
+.plan-item p {
+  margin-top: 15px;
+  font-size: 16px;
+  width: 8em;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 700;
+  font-style: italic;
+  text-align: left;
+}
+.plans.visible .tick-mark {
+  animation: tick-slide-in 0.3s forwards;
+}
+
+.plans.visible p {
+  animation: text-slide-in 0.5s forwards;
+}
+.how-it-works-section {
+  background-color: #2a2e24; /* Dark gray background */
+  color: white;
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.how-it-works-section h1{
+  font-size: 3em;
+  font-family: "Libre Baskerville", serif;
+  margin: 0.5em 0;
+  color: #34e970;
+}
+.how-it-works-section p{
+  font-size: 16px;
+  color: #34e970;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 500;
+}
+
+.how-it-works-boxes {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 3em;
+  width: 80vw;
+}
+
+.how-it-works-box {
+  background-color: #4e4e4e; 
+  padding: 20px;
+  width: 10em;
+  height: 8em;
+  border-radius: 0 2em 0 2em;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.how-it-works-box:hover {
+  transform: rotateX(10deg) rotateY(-10deg) rotateZ(3deg); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.how-it-works-icon {
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #00a550; /* Green background */
+  padding: 0 20px;
+}
+
+.footer-boxes {
+  display: flex;
+  justify-content: space-between;
+  width: 90vw;
+}
+
+.footer-box {
+  text-align: center;
+  width: 30%;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+}
+.footer-box h3{
+  font-size: 18px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: bolder;
+}
+.footer-box p{
+  padding: 5px 0;
+  font-family: 'Libre Bakersville', serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+.bot-footer {
+  background-color: rgb(0, 0, 0);
+  color: #12da72; /* Green text */
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
+  padding: 15px 0;
+  width: 100vw;
+  margin-bottom: 0;
+}
+
+.bot-footer svg {
+  color: white; /* White icons */
+  margin-left: 10px;
+  font-size: 25px;
+  padding-right: 1em;
+  cursor: pointer;
+}
+
+.bot-footer p {
+  /* margin-right: 10em; */
+  font-family: 'Libre Bakersville', serif;
+  font-size: 15px;
+}
+
+.footer-section h3 {
+  margin-bottom: 10px;
+}
+
+.footer-section p {
+  margin-bottom: 5px;
+}
+
+
+@keyframes tick-slide-in {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes text-slide-in {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
