@@ -6,12 +6,19 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const heroHeight = document.querySelector('.hero-section')?.offsetHeight || 0;
-            
-      if (window.scrollY >= heroHeight) {
-        setIsVisible(false);  // Hide Navbar after scrolling past hero + carousel
+      const heroElement = document.querySelector('.hero-section');
+      const aboutHeroElement = document.querySelector('.about-hero');
+
+      const heroHeight = heroElement?.offsetHeight || 0;
+      const aboutHeroHeight = aboutHeroElement?.offsetHeight || 0;
+
+      // Determine which page section to track based on the presence of each element
+      if (heroElement && window.scrollY >= heroHeight) {
+        setIsVisible(false); // Hide Navbar after scrolling past hero-section
+      } else if (aboutHeroElement && window.scrollY >= aboutHeroHeight) {
+        setIsVisible(false); // Hide Navbar after scrolling past about-hero
       } else {
-        setIsVisible(true);   // Show Navbar before reaching the carousel
+        setIsVisible(true); // Show Navbar if neither section is fully scrolled past
       }
     };
 

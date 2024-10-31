@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant:ital,wght@0,300..700;1,300..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -123,7 +122,7 @@ code {
 .hero-section {
   position: relative;
   width: 100vw;
-  background-image: url('/public/images/Hero.png');
+  background-image: url(/public/images/Hero.png);
   background-size: cover;
   background-position: center;
   padding: 10px 0;
@@ -420,7 +419,7 @@ code {
   animation: text-slide-in 0.5s forwards;
 }
 .how-it-works-section {
-  background-color: #2a2e24; /* Dark gray background */
+  background-color: #181b17; /* Dark gray background */
   color: white;
   padding: 40px;
   text-align: center;
@@ -534,6 +533,142 @@ code {
 .footer-section p {
   margin-bottom: 5px;
 }
+
+.about-hero {
+  margin-top: 10em;
+  background-image: url(../public/images/pegs.png);
+  position: relative;
+  width: 100vw;
+  background-size: cover;
+  background-position: left center;
+  background-attachment: fixed;
+  padding: 2em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.about-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4); /* Adjust color and opacity */
+  z-index: 1;
+}
+
+.about-hero h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  text-decoration: underline;
+  font-family: 'Libre Baskerville', serif;
+  font-weight:700;
+  font-size: 41px;
+  color: #000;
+  z-index: 2;
+}
+
+.about-hero h4 {
+  font-size: 1.7em;
+  margin-bottom: 1em;
+  font-family: 'Cormorant', serif;
+  font-weight: 700;
+  color: #000;
+  z-index:2;
+}
+
+.about-hero button {
+  padding: 0.5em 1em;
+  margin: 0.9em 0;
+  background-color: #ffffff; 
+  color: #000;
+  border: 1px solid black;
+  font-family: 'Cormorant', serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  border-radius: 4em;
+  cursor: pointer;
+  z-index: 2;
+}
+.about-hero button:hover {
+  background-color: rgb(37, 224, 121);
+  transition: transform 0.3s ease;
+  border: 1px solid rgb(37, 224, 121);
+}
+
+.timeline {
+  padding: 1.5em;
+  border-radius: 8px;
+  width: 25em;
+  z-index: 2;
+}
+.timeline p {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7em;
+  margin: 1em 0em;
+  color: #000;
+  font-weight: 600;
+}
+
+.timeline p span {
+  display: inline-block;
+}
+
+.timeline h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5em;
+  margin-bottom: 0.8em;
+  color: #000000;
+}
+
+/* Base styling for the About section */
+.about {
+  display: flex;
+  background-color: #d3d0d0; /* Light gray background */
+  padding-top: 2em;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Cormorant', serif;
+}
+
+.about img {
+  width: 50%;
+  max-width: 450px;
+  object-fit:contain;
+  height: auto;
+}
+
+/* Styling for the content section */
+.about-content {
+  background-color: #000;
+  color: #00a652;
+  padding: 20px;
+  width: 50%;
+  height:620px;
+}
+
+/* Heading and paragraph styling */
+.about-content h1 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 45px;
+  padding: 0 1em;
+  font-weight: 700;
+}
+
+.about-content p {
+  color: #21d67c; 
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+  padding: 0 2em;
+  font-weight: 700;
+}
+
 
 
 @keyframes tick-slide-in {
