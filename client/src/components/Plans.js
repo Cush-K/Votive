@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom"
 
 function Plans() {
     const plansRef = useRef(null);
@@ -51,7 +52,9 @@ function Plans() {
                                 <p>Up to 20% savings on normal pricing*</p>
                             </div>
                         </div>
+                        <Link to='/contact-votive-laundry'>
                         <button>Get Started</button>
+                        </Link>
                     </div>
 
                     <div className="plans">
@@ -78,7 +81,9 @@ function Plans() {
                                 <p>Up to 30% savings on normal pricing*</p>
                             </div>
                         </div>
+                        <Link to='/contact-votive-laundry'>
                         <button>Get Started</button>
+                        </Link>
                     </div>
 
                     <div className="plans">
@@ -105,7 +110,9 @@ function Plans() {
                                 <p>Up to 40% savings on normal pricing*</p>
                             </div>
                         </div>
+                        <Link to='/contact-votive-laundry'>
                         <button>Get Started</button>
+                        </Link>
                     </div>
 
                 </div>

@@ -1,5 +1,6 @@
 import React from "react";
-import { FaClock, FaTruck, FaMobileAlt } from "react-icons/fa"; 
+import { FaClock, FaTruck, FaMobileAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Hero(){
     return (
@@ -13,10 +14,12 @@ function Hero(){
           <div className="hero-box hero-time">
             <FaClock className="hero-icon" />
             <h4>Working Hours</h4>
-            <p><strong>Monday - Friday:</strong> 08:00AM - 6:00PM</p>
-            <p><strong>Saturday:</strong> 08:00AM - 5:00PM</p>
-            <p><strong>Sunday:</strong> Closed</p>
-            <button className="hero-btn">See More &rarr;</button> {/* Hover Button */}
+            <p><span><strong>Monday - Friday:</strong></span> <span>08:00AM - 6:00PM</span></p>
+            <p><span><strong>Saturday:</strong></span> <span>08:00AM - 5:00PM</span></p>
+            <p><span><strong>Sunday:</strong></span> <span>Closed</span></p>
+            <Link to="/about-votive-laundry">
+            <button className="hero-btn">See More &rarr;</button>
+            </Link>
           </div>
 
           {/* Pickup and Delivery Section */}
@@ -24,7 +27,9 @@ function Hero(){
             <FaTruck className="hero-icon" />
             <h4>Pickup and Delivery</h4>
             <p>We offer Pick Up and Delivery services around Kiambu and parts of Nairobi, and ensure it is on time as specified in your order!</p>
-            <button className="hero-btn">Schedule Now &rarr;</button> {/* Hover Button */}
+            <Link to='/votive-laundry-schedule-pick-up'>
+            <button className="hero-btn">Schedule Now &rarr;</button>
+            </Link>
           </div>
 
           {/* Contact Us Section */}
@@ -32,7 +37,7 @@ function Hero(){
             <FaMobileAlt className="hero-icon" />
             <h4>Contact Us</h4>
             <p>Call us today and make your order. We'll pick wherever you are at your convenience.</p>
-            <button className="hero-btn">Call Now &rarr;</button> {/* Hover Button */}
+            <Link to='tel:+254 757 167022'> <button className="hero-btn">Call Now &rarr;</button> </Link>
           </div>
         </div>
       </div>
