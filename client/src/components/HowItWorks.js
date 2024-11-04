@@ -1,6 +1,7 @@
 import React from "react";
 import { FaShippingFast} from "react-icons/fa";
-import { MdLocalLaundryService, MdMoped, MdPhonelinkRing } from 'react-icons/md';
+import { MdLocalLaundryService, MdMoped } from 'react-icons/md';
+import { PiPhoneDisconnectBold } from "react-icons/pi";
 
 function HowItWorks(){
     return (
@@ -10,7 +11,7 @@ function HowItWorks(){
             <div className="how-it-works-boxes">
                 <div className="how-it-works-box">
                     <div className="how-it-works-icon">
-                    <MdPhonelinkRing />
+                    <PiPhoneDisconnectBold />
                     </div>
                     <p><strong>CALL</strong>/Whatsapp/SMS us to make your order</p>
                 </div>

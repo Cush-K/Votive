@@ -9,22 +9,23 @@ import { FiPhone } from "react-icons/fi";
 function ContactForm() {
     return (
         <div className="contact-info">
+            <div className="info-container">
             <div className="our-info">
                 <h1>Our Info</h1>
                 <div className="info-item">
-                    <CiLocationOn className="icon" /> 
-                    <p>50 meters from Total Petrol Station, Kiambu road (Opp. Entrance to Edenville)</p>
+                    <CiLocationOn className="info-icon location" /> 
+                    <h3>50 meters from Total Petrol Station, Kiambu road (Opp. Entrance to Edenville)</h3>
+                </div>
+                <div className="info-item phone">
+                    <FiPhone className="info-icon " />
+                    <h3><Link to='tel:+254 757 167022'>+254 757 167022</Link></h3>
                 </div>
                 <div className="info-item">
-                    <FiPhone className="icon" />
-                    <h3>Phone: +254 757 167022</h3>
+                    <TfiEmail className="info-icon" />
+                    <h3><Link to='mailto: votivelaundry@gmail.com'>info@votivelaundry.co.ke</Link></h3>
                 </div>
                 <div className="info-item">
-                    <TfiEmail className="icon" />
-                    <h3>info@votivelaundry.co.ke</h3>
-                </div>
-                <div className="info-item">
-                <FaRegThumbsUp className="icon"/>
+                <FaRegThumbsUp className="info-icon"/>
                 <div className="social-icons">
                     <Link to='https://www.facebook.com/VotiveLaundry' target="_blank"><FaFacebookF className="icon" /></Link>
                     <Link to='https://x.com/votive_Laundry' target="_blank"><FaXTwitter className="icon" /></Link>
@@ -43,9 +44,10 @@ function ContactForm() {
                         <input type="email" placeholder="Email" required />
                         <input type="Phone" placeholder="Phone" required />
                     </div>
-                    <textarea placeholder="Message" required />
+                    <textarea placeholder="Type Your Meessage Here ..." required />
                     <button type="submit">Submit</button>
                 </form>
+            </div>
             </div>
         </div>
     );

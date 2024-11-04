@@ -13,8 +13,9 @@ function Contacts() {
             <Navbar />
             <div className='contact-container'>
                 <h1>Contact Us</h1>
-                <div>
+                <div className='iframe'>
                     <iframe
+                        title='map'
                         width="100%"
                         height="300"
                         frameborder="0"
@@ -23,8 +24,9 @@ function Contacts() {
                         src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=votive%20laundry%20and%20dry%20cleaning+(votive%20laundry%20and%20drycleaning)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
                     </iframe>
                 </div>
+                <ContactForm />
             </div>
-            <ContactForm />
+            
             <Footer />
         </div>
     )

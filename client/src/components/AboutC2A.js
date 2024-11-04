@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function AboutC2A(){
     return (
@@ -6,9 +7,9 @@ function AboutC2A(){
         <div className="about-c2a">
         <div className="c2a">
             <h2>Schedule with us and see what makes us stand out!</h2>
-            <button>SCHEDULE PICK UP &rarr;</button>
+            <button><Link to='/votive-laundry-schedule-pick-up'>SCHEDULE PICK UP &rarr;</Link></button>
         </div>
-        <img src="images/Dry Cleaned Shirts.png"/>
+        <img src="images/Dry Cleaned Shirts.png" alt="Dry Cleaned Shirts"/>
         </div>
         </div>
     )

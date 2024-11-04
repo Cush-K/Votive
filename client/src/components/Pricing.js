@@ -10,7 +10,8 @@ function Pricing(){
             <p><span>Curtains Per Kilo</span> <span>Sh. 500</span></p>
             <p><span>Shoes Per Pair</span> <span>Sh. 200</span></p>
             <p><span>Carpets Per SQFT</span> <span>Sh. 40</span></p>
-            <Link><button className="pricing-button">SCHEDULE PICK UP &rarr;</button></Link>
+            <button className="pricing-button"><Link to='/votive-laundry-schedule-pick-up'>SCHEDULE PICK UP &rarr;</Link></button>
+
         </div>
         <div className="item-pricing">
             <h2>Pricing Per Item</h2>
@@ -62,7 +63,7 @@ function Pricing(){
                 <p><span><strong>Hand Bag</strong> </span><span>Sh. 350</span></p>
                 <p><span><strong>Backpack</strong> </span><span>Sh. 400</span></p>
                 </div>
-                <Link><button className="pricing-button">SCHEDULE PICK UP &rarr;</button></Link>
+                <button className="pricing-button"><Link to='/votive-laundry-schedule-pick-up'>SCHEDULE PICK UP &rarr;</Link></button>
                 <div className="caveat">
                     <p>Please note that these are our current base prices.
                          We do assess reasonable additional charges for garments and details that demand extraordinary care or additional labor in order to clean properly.</p>

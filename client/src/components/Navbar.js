@@ -11,11 +11,14 @@ function Navbar() {
       const heroElement = document.querySelector('.hero-section');
       const aboutHeroElement = document.querySelector('.about-hero');
       const servicesHeroElement = document.querySelector('.services-hero');
+      const iframeElement = document.querySelector('.iframe');
+
 
 
       const heroHeight = heroElement?.offsetHeight || 0;
       const aboutHeroHeight = aboutHeroElement?.offsetHeight || 0;
       const servicesHeroHeight = servicesHeroElement?.offsetHeight || 0;
+      const iframeHeight = iframeElement?.offsetHeight || 0;
 
 
       // Determine which page section to track based on the presence of each element
@@ -24,6 +27,8 @@ function Navbar() {
       } else if (aboutHeroElement && window.scrollY >= aboutHeroHeight) {
         setIsVisible(false); // Hide Navbar after scrolling past about-hero
       } else if (servicesHeroElement && window.scrollY >= servicesHeroHeight) {
+        setIsVisible(false); // Hide Navbar after scrolling past services-hero
+      }else if (iframeElement && window.scrollY >= iframeHeight) {
         setIsVisible(false); // Hide Navbar after scrolling past services-hero
       } else {
         setIsVisible(true); // Show Navbar if neither section is fully scrolled past
