@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import DatePicker from 'react-datepicker'
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
 
 const formSchema = yup.object().shape({
     firstname: yup.string().required('First name is required'),
@@ -23,14 +26,19 @@ const timeOptions = [
     '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM'
 ];
 
+const cleaningOptions = [
+    'Personal Laundry', 'Duvets and Blankets', 'Curtains', 'Carpets and Upholstery',
+    'Wedding Gowns and Garments', 'Pressing', 'Hotels and Restaurants', 'Company Uniforms'
+];
+
 function Scheduling() {
     const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
         document.title = 'SCHEDULE PICK UP | Votive Laundry and Dry Cleaning';
-    })
+    });
 
-    const { values, errors, touched, handleChange, handleBlur, handleSubmit, } = useFormik({
+    const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
         initialValues: {
             firstname: '',
             lastname: '',
@@ -50,129 +58,122 @@ function Scheduling() {
         },
     });
 
-
     return (
-        <div>
+        <>
+        <Navbar />
+        <div className="form-page">
+            <div className='form-container'> 
             <h1>SCHEDULE PICK UP</h1>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-row">
                     <input
                         type="text"
                         name="firstname"
-                        placeholder='First Name'
+                        placeholder="First Name"
                         value={values.firstname}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        className={touched.firstname && errors.firstname ? "error" : ""}
                     />
-                    {touched.firstname && errors.firstname && <div className="error">{errors.firstname}</div>}
-                </div>
-
-                <div>
                     <input
                         type="text"
                         name="lastname"
-                        placeholder='Last Name'
+                        placeholder="Last Name"
                         value={values.lastname}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        className={touched.lastname && errors.lastname ? "error" : ""}
                     />
-                    {touched.lastname && errors.lastname && <div className="error">{errors.lastname}</div>}
                 </div>
 
-                <div>
+                <div className="form-row">
                     <input
                         type="email"
                         name="email"
-                        placeholder='Email'
+                        placeholder="Email"
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        className={touched.email && errors.email ? "error" : ""}
                     />
-                    {touched.email && errors.email && <div className="error">{errors.email}</div>}
-                </div>
-
-                <div>
                     <input
                         type="text"
                         name="phone"
-                        placeholder='Phone'
+                        placeholder="Phone"
                         value={values.phone}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        className={touched.phone && errors.phone ? "error" : ""}
                     />
-                    {touched.phone && errors.phone && <div className="error">{errors.phone}</div>}
                 </div>
 
-                <div>
+                <div className="full-width">
                     <select
                         name="category"
                         value={values.category}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        className={touched.category && errors.category ? "error" : ""}
                     >
                         <option value="" label="Choose an option" />
-                        <option value="option1" label="Option 1" />
-                        <option value="option2" label="Option 2" />
+                        {cleaningOptions.map((option, index) => (
+                            <option key={index} value={option}>{option}</option>
+                        ))}
                     </select>
-                    {touched.category && errors.category && <div className="error">{errors.category}</div>}
                 </div>
 
-                <div>
+                <div className="form-row">
                     <input
                         type="text"
                         name="estate"
-                        placeholder='Estate'
+                        placeholder="Estate"
                         value={values.estate}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        className={touched.estate && errors.estate ? "error" : ""}
                     />
-                    {touched.estate && errors.estate && <div className="error">{errors.estate}</div>}
-                </div>
-
-                <div>
                     <input
                         type="text"
                         name="apartment"
-                        placeholder='Apartment, House No., Floor.'
+                        placeholder="Apartment, House No., Floor."
                         value={values.apartment}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        className={touched.apartment && errors.apartment ? "error" : ""}
                     />
-                    {touched.apartment && errors.apartment && <div className="error">{errors.apartment}</div>}
                 </div>
 
-                <div>
+                <div className="full-width">
                     <input
                         type="text"
                         name="landmark"
-                        placeholder='Closest Landmark'
+                        placeholder="Closest Landmark"
                         value={values.landmark}
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
                 </div>
 
-                <div>
+                <div className="form-row">
                     <DatePicker
                         selected={selectedDate}
+                        closeOnScroll={(e) => e.target === document}
                         onChange={(date) => {
                             setSelectedDate(date);
                             handleChange({ target: { name: 'date', value: date } });
                         }}
+                        minDate={new Date()}
                         onBlur={handleBlur}
                         placeholderText="Select a date"
                         dateFormat="yyyy/MM/dd"
-                        // isClearable
+                        className={touched.date && errors.date ? "error" : ""}
                     />
-                    {touched.date && errors.date && <div className="error">{errors.date}</div>}
-                </div>
-
-                <div>
                     <select
                         name="time"
                         value={values.time}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        className={touched.time && errors.time ? "error" : ""}
                     >
                         <option value="" label="Choose the time" />
                         {timeOptions.map((time) => (
@@ -181,24 +182,27 @@ function Scheduling() {
                             </option>
                         ))}
                     </select>
-                    {touched.time && errors.time && <div className="error">{errors.time}</div>}
                 </div>
 
-                <div>
+                <div className="full-width">
                     <textarea
                         name="message"
-                        placeholder='Leave specific instructions if any.'
+                        placeholder="Leave specific instructions if any."
                         value={values.message}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         rows="4"
+                        className={touched.message && errors.message ? "error" : ""}
                     />
                 </div>
 
-                <button type="submit">Submit</button>
+                <button type="submit">SCHEDULE PICK UP</button>
             </form>
         </div>
-    )
+        </div>
+        <Footer />
+        </>
+    );
 }
 
 export default Scheduling;
