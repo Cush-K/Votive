@@ -117,6 +117,30 @@ code {
 .nav-menu li {
   display: inline-block;
 }
+.admin-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 1rem;
+}
+
+.admin-section span {
+  font-weight: bold;
+  color: #333;
+}
+
+.admin-section button {
+  padding: 0.5rem 1rem;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.admin-section button:hover {
+  background-color: #d32f2f;
+}
 /* General Layout */
 .hero-section {
   position: relative;
@@ -1124,7 +1148,7 @@ input.error, select.error, textarea.error input {
   margin-bottom: 2.5em;
 }
 
-.form-container button {
+.schedule-btn {
   width: 70%;
   margin: 0 auto;
   padding: 1.2em;
@@ -1136,13 +1160,88 @@ input.error, select.error, textarea.error input {
   border: 2px solid black;
 }
 
-.form-container button:hover {
+.schedule-btn:hover {
   background-color: #292F33;
   border: 2px solid #292F33;
   color: white;
 }
-
-
+.login input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1em;
+  border: 1px solid #cccccc; 
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #fdfdfd; 
+  box-shadow: 0 5px 10px rgba(0, 123, 255, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.errors {
+  color:orangered;
+  font-size: 14px;
+  margin-top: -0.5em;
+  margin-bottom: 0.5em;
+}
+.login input:focus {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(233, 60, 60, 0.2);
+  outline: none;
+}
+.login button:hover {
+  background-color: #00569e; 
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.4);
+}
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+.login {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+}
+.login h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+.responseMessage {
+  margin-top: 20px;
+  color: green;
+  font-size: 16px;
+}
+.login button {
+  width: 100%;
+  padding: 10px;
+  background-color: #145da0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s;
+}
+button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+.login p a {
+  color: #145da0;
+  text-decoration: none;
+}
+.login p a:hover {
+  text-decoration: underline;
+}
+.dash-container{
+  margin-top:13em;
+}
 
 
 @keyframes tick-slide-in {

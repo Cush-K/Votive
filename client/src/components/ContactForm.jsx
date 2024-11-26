@@ -44,7 +44,7 @@ function ContactForm() {
                         <input type="email" placeholder="Email" required />
                         <input type="Phone" placeholder="Phone" required />
                     </div>
-                    <textarea placeholder="Type Your Meessage Here ..." required />
+                    <textarea placeholder="Type Your Message Here ..." required />
                     <button type="submit">Submit</button>
                 </form>
             </div>

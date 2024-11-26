@@ -196,7 +196,7 @@ function Scheduling() {
                     />
                 </div>
 
-                <button type="submit">SCHEDULE PICK UP</button>
+                <button className='schedule-btn' type="submit">SCHEDULE PICK UP</button>
             </form>
         </div>
         </div>

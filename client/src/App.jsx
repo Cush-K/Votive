@@ -1,10 +1,10 @@
 import React, {useEffect } from "react";
-import Navbar from "./Navbar";
-import SwipeImages from "./Swiper";
-import Hero from "./Hero";
-import Plans from "./Plans";
-import HowItWorks from "./HowItWorks";
-import Footer from "./Footer";
+import Navbar from "./components/Navbar";
+import SwipeImages from "./components/Swiper";
+import Hero from "./components/Hero";
+import Plans from "./components/Plans";
+import HowItWorks from "./components/HowItWorks";
+import Footer from "./components/Footer";
 
 
 function App() {

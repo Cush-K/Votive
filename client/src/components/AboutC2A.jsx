@@ -9,7 +9,7 @@ function AboutC2A(){
             <h2>Schedule with us and see what makes us stand out!</h2>
             <button><Link to='/votive-laundry-schedule-pick-up'>SCHEDULE PICK UP &rarr;</Link></button>
         </div>
-        <img src="images/Dry Cleaned Shirts.png" alt="Dry Cleaned Shirts"/>
+        <img src="images/DryCleanedShirts.png" alt="Dry Cleaned Shirts"/>
         </div>
         </div>
     )
