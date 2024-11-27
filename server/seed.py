@@ -15,6 +15,7 @@ with app.app_context():
     ScheduledJob.query.delete()
     Admin.query.delete()
     Message.query.delete()
+    Image.query.delete()
     
     print('Seeding Customer data')
     
@@ -89,22 +90,17 @@ with app.app_context():
     db.session.commit()
     
     print('Generating Image Data...')
-    
-    image1 = Image(
-        name = "image1",
-        image_url = "https://images.pexels.com/photos/5087727/pexels-photo-5087727.jpeg?auto=compress&cs=tinysrgb&w=400",
-        redirect_link = "/"                
-    )
-    db.session.add(image1)
-    db.session.commit()
-    
-    image2 = Image(
-        name = "image2",
-        image_url = "https://images.pexels.com/photos/1639932/pexels-photo-1639932.jpeg?auto=compress&cs=tinysrgb&w=400",
-        redirect_link = "/about"
-    )
-    db.session.add(image2)
-    db.session.commit()
+    images = []
+    links = ["/", "/about-votive-laundry", "/contact-votive-laundry"]
+    for _ in range(10):
+        image = Image(
+            name=fake.word(),
+            image_url="https://img.freepik.com/premium-photo/black-afro-woman-smiling-cheerfully-feeling-happy-showing-concept-copy-space-with-palm-hand-housekeeping-concept-household-concept_1194-212717.jpg?w=740",
+            redirect_link=random.choice(links)
+        )
+        images.append(image)
+    db.session.add_all(images)
+    db.session.commit() 
     
     print("Seeding Complete!")
             

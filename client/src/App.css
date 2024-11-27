@@ -1239,9 +1239,73 @@ button:disabled {
 .login p a:hover {
   text-decoration: underline;
 }
-.dash-container{
+.dash-container {
+  padding: 2em;
+  text-align: center;
   margin-top:13em;
 }
+.dash-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+  padding: 0 2em;
+}
+.dash-uploads input{
+  padding:5px 0;
+}
+.dash-uploads button{
+  width: 12em;
+}
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  gap: 1.5em;
+  justify-content: center;
+  padding: 1em;
+}
+
+.card {
+  position: relative;
+  width: 20em;
+  height: 15em;
+  overflow: hidden;
+  border-radius: 1em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5em;
+  color: white;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 0.3em;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.delete-icon:hover {
+  color: red;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
 
 
 @keyframes tick-slide-in {

@@ -5,6 +5,7 @@ from flask_restful import Resource, Api
 from flask_bcrypt import Bcrypt
 from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
+from datetime import timedelta
 from dotenv import load_dotenv  # Import dotenv
 import os
 
@@ -18,8 +19,10 @@ app.config['SECRET_KEY'] = "b'\x98x\x0e\xf4\x83^\n:\x1b\xf4\xc8\xb5X\\c\xf7)\xba
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = True
-app.config['SESSION_COOKIE_SECURE'] = False 
-app.json.compact = False
+app.config['SESSION_COOKIE_SECURE'] = False
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config['SESSION_PERMANENT'] = True
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 
 # Validate SECRET_KEY
 if not app.config['SECRET_KEY']:
@@ -110,6 +113,29 @@ class Images(Resource):
     def get(self):
         images_dict = [image.to_dict() for image in Image.query.all()]
         return make_response(images_dict, 200)
+    
+    def post(self):
+        data = request.get_json()
+        
+         # Validate required fields
+        required_fields = ['name', 'image_url', 'redirect_link']
+        for field in required_fields:
+            if field not in data:
+                return {"error": f"'{field}' is required"}, 400
+            
+        image = Image(
+            name=data['name'],
+            image_url=data['image_url'],
+            redirect_link=data['redirect_link']
+        )
+        
+        try:
+            db.session.add(image)
+            db.session.commit()
+            return image.to_dict(), 201
+        except Exception as e:
+            db.session.rollback()
+            return {"error": f"Database error: {str(e)}"}, 500
     
 
 class ImagesById(Resource):
