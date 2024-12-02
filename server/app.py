@@ -1,11 +1,11 @@
 from flask import Flask, make_response, url_for, jsonify, session, redirect, request
 from flask_migrate import Migrate
-from models import db, Customer, Admin, Message, Image
+from models import db, Customer, Admin, Message, Image, ScheduledJob
 from flask_restful import Resource, Api
 from flask_bcrypt import Bcrypt
 from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
-from datetime import timedelta
+from datetime import timedelta, datetime
 from dotenv import load_dotenv  # Import dotenv
 import os
 
@@ -151,10 +151,78 @@ class ImagesById(Resource):
             "error": "Failed to Delete Image"
         }
         
+class Messages(Resource):
+    def get(self):
+        messages_dict = [message.to_dict() for message in Message.query.all()]
+        return make_response(messages_dict, 200)
+    
+    def post(self):
+        data = request.get_json()
         
+         # Validate required fields
+        required_fields = ['firstName', 'lastName', 'email', 'phoneNumber','message']
+        for field in required_fields:
+            if field not in data:
+                return {"error": f"'{field}' is required"}, 400
+            
+        message = Message(
+            first_name=data['firstName'],
+            last_name=data['lastName'],
+            email=data['email'],
+            phone_number=data['phoneNumber'],
+            message=data['message']
+        )
         
+        try:
+            db.session.add(message)
+            db.session.commit()
+            return message.to_dict(), 201
+        except Exception as e:
+            db.session.rollback()
+            return {"error": f"Database error: {str(e)}"}, 500
+
+class Schedules(Resource):
+    def get(self):
+        schedules_dict = [schedule.to_dict() for schedule in ScheduledJob.query.all()]
+        return make_response(schedules_dict, 200)
+    
+    def post(self):
+        data = request.get_json()
+        
+        try:
+            # Convert date and time fields
+            parsed_date = datetime.strptime(data['date'], "%Y-%m-%d").date()  # Convert to Python date object
+            parsed_time = datetime.strptime(data['time'], "%I:%M %p").time()  # Convert to Python time object (e.g., "08:00 AM")
+            
+            schedule = ScheduledJob(
+                first_name=data['firstname'],
+                last_name=data['lastname'],
+                email=data['email'],
+                phone_number=data['phone'],
+                category=data['category'],
+                estate=data['estate'],
+                apartment=data['apartment'],
+                landmark=data['landmark'],
+                date=parsed_date,
+                time=parsed_time,
+                message=data['message'],
+            )
+            
+            db.session.add(schedule)
+            db.session.commit()
+            return schedule.to_dict(), 201
+        
+        except ValueError as ve:
+            return {"error": f"Invalid date or time format: {str(ve)}"}, 400
+        
+        except Exception as e:
+            db.session.rollback()
+            return {"error": f"Database error: {str(e)}"}, 500
+   
 
 api.add_resource(Images, '/api/images')
+api.add_resource(Messages, '/api/messages')
+api.add_resource(Schedules, '/api/schedules')
 api.add_resource(ImagesById, '/api/images/<int:id>')
 api.add_resource(CustomerData, '/api/customers', endpoint='customers')
 api.add_resource(Login, '/api/login')

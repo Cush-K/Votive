@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useSnackbar } from 'notistack';
 
 
 const formSchema = yup.object().shape({
@@ -33,12 +34,13 @@ const cleaningOptions = [
 
 function Scheduling() {
     const [selectedDate, setSelectedDate] = useState(null);
+    const {enqueueSnackbar} = useSnackbar()
 
     useEffect(() => {
         document.title = 'SCHEDULE PICK UP | Votive Laundry and Dry Cleaning';
     });
 
-    const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
+    const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm } = useFormik({
         initialValues: {
             firstname: '',
             lastname: '',
@@ -54,7 +56,26 @@ function Scheduling() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            console.log('Form data', values);
+            fetch("http://127.0.0.1:5555/api/schedules", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(values),
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        enqueueSnackbar("Order Scheduled successfully", { variant: "success" });
+                        resetForm()
+                    } else {
+                        enqueueSnackbar("Failed to scedule order. Please try again.", { variant: "error" });
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    enqueueSnackbar("An error occurred while scheduling your order.", { variant: "error" });
+                });
         },
     });
 
@@ -160,7 +181,7 @@ function Scheduling() {
                         closeOnScroll={(e) => e.target === document}
                         onChange={(date) => {
                             setSelectedDate(date);
-                            handleChange({ target: { name: 'date', value: date } });
+                            handleChange({ target: { name: 'date', value: date.toISOString().split('T')[0] } });
                         }}
                         minDate={new Date()}
                         onBlur={handleBlur}

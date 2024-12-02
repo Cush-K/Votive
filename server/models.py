@@ -34,7 +34,7 @@ class ScheduledJob(db.Model, sm):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
-    email = db.Column(db.String, unique=True)
+    email = db.Column(db.String, unique=False)
     phone_number = db.Column(db.String)
     category = db.Column(db.String)
     estate = db.Column(db.String)
@@ -54,7 +54,7 @@ class Message(db.Model, sm):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
-    email = db.Column(db.String, unique=True)
+    email = db.Column(db.String, unique=False)
     phone_number = db.Column(db.String)
     message = db.Column(db.String)
     

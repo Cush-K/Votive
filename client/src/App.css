@@ -1102,6 +1102,7 @@ code {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size:20px;
+  font-weight: 700;
 }
 
 textarea {
@@ -1114,6 +1115,7 @@ textarea {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size:20px;
+  font-weight: 700;
 }
 
 .form button {
@@ -1689,7 +1691,7 @@ button:disabled {
     gap: .5rem;
   }
   .form-row input,.form-row select{
-    width: 14em;
+    width: 13em;
     font-size: 13px;
   }
   .full-width textarea, .full-width input, .full-width select{

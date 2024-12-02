@@ -11,26 +11,10 @@ fake = Faker()
 with app.app_context():
     
     print('Clearing Database...')
-    Customer.query.delete()
-    ScheduledJob.query.delete()
     Admin.query.delete()
     Message.query.delete()
     Image.query.delete()
     
-    print('Seeding Customer data')
-    
-    customers = []
-    for _ in range(30):
-        customer = Customer(
-            first_name=fake.first_name(),
-            last_name=fake.last_name(),
-            email=fake.email(),
-            phone_number=fake.phone_number(),
-            password=bcrypt.generate_password_hash('1234Abcd').decode('utf-8')
-        )
-        customers.append(customer)
-    db.session.add_all(customers)
-    db.session.commit()
 
     print('Seeding Admin Data...')
     admin = Admin(
@@ -47,46 +31,6 @@ with app.app_context():
         password=bcrypt.generate_password_hash('&VotiVe2021').decode('utf-8')
     )
     db.session.add(dev)
-    db.session.commit()
-    
-    print('Seeding Scheduling Data...')
-    scheduledjobs = []
-    
-    cleaningOptions = [
-            'Personal Laundry', 'Duvets and Blankets', 'Curtains', 'Carpets and Upholstery',
-            'Wedding Gowns and Garments', 'Pressing', 'Hotels and Restaurants', 'Company Uniforms'
-        ]
-    
-    for _ in range(50):
-        scheduledjob = ScheduledJob(
-            first_name=fake.first_name(),
-            last_name=fake.last_name(),
-            email=fake.email(),
-            phone_number=fake.phone_number(),
-            category=random.choice(cleaningOptions),
-            estate=fake.city(),
-            apartment=fake.building_number(),
-            landmark=fake.street_name(),
-            date=fake.date_this_year(),
-            time=fake.time_object(),
-            message=fake.paragraph()
-        )
-        scheduledjobs.append(scheduledjob)
-    db.session.add_all(scheduledjobs)
-    db.session.commit()
-    
-    print('Scheduling Message Data...')
-    messages = []
-    for _ in range(20):
-        message = Message(
-            first_name=fake.first_name(),
-            last_name=fake.last_name(),
-            email=fake.email(),
-            phone_number=fake.phone_number(),
-            message=fake.paragraph()
-        )
-        messages.append(message)
-    db.session.add_all(messages)
     db.session.commit()
     
     print('Generating Image Data...')

@@ -1,8 +1,8 @@
-"""Initial Migration
+"""initial migration
 
-Revision ID: 5cf89b8df91e
+Revision ID: 4d7c63addc58
 Revises: 
-Create Date: 2024-11-25 15:42:39.900526
+Create Date: 2024-12-02 14:58:12.150427
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5cf89b8df91e'
+revision = '4d7c63addc58'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -50,8 +50,7 @@ def upgrade():
     sa.Column('email', sa.String(), nullable=True),
     sa.Column('phone_number', sa.String(), nullable=True),
     sa.Column('message', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('scheduled_jobs',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -66,8 +65,7 @@ def upgrade():
     sa.Column('date', sa.Date(), nullable=True),
     sa.Column('time', sa.Time(), nullable=True),
     sa.Column('message', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email')
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 
