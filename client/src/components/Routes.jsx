@@ -5,6 +5,7 @@ import Services from "../pages/Services";
 import AdminDash from "./AdminDash";
 import App from "../App";
 import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = [
     {
@@ -33,12 +34,8 @@ const routes = [
     },
     {
         path: "admindashboard",
-        element: <AdminDash />
-    },
-    // {
-    //     path: "auth/callback",
-    //     element: <OAuthCallback />
-    // }
+        element: <PrivateRoute element={<AdminDash />} />
+    }
 ]
 
 export default routes;
