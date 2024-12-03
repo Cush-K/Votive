@@ -20,7 +20,7 @@ with app.app_context():
     dev = Admin(
         username="Dev",
         email= "kkalvine4@gmail.com",
-        password=bcrypt.generate_password_hash('&VotiVe2021').decode('utf-8')
+        password=bcrypt.generate_password_hash(os.getenv('PASSWORD')).decode('utf-8')
     )
     db.session.add(dev)
     db.session.commit()
