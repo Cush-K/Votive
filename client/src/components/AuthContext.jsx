@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     // Define fetchSession outside useEffect for reuse
     const fetchSession = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:5555/api/session`, {
+            const response = await fetch(`/api/session`, {
                 method: 'GET',
                 credentials: 'include',
             });

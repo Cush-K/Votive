@@ -13,7 +13,7 @@ function AdminDash() {
     const [resetTrigger, setResetTrigger] = useState(false);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5555/api/images")
+        fetch("/api/images")
             .then((response) => response.json())
             .then((data) => {
                 setImages(data);
@@ -22,7 +22,7 @@ function AdminDash() {
     }, []);
 
     const handleDelete = (imageId) => {
-        fetch(`http://127.0.0.1:5555/api/images/${imageId}`, {
+        fetch(`/api/images/${imageId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function AdminDash() {
             redirect_link: redirectLink,
         };
 
-        fetch("http://127.0.0.1:5555/api/images", {
+        fetch("/api/images", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

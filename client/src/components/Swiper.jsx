@@ -11,7 +11,7 @@ function SwipeImages() {
     const [swiperImages, setSwiperImages] = useState([]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5555/api/images")
+        fetch("/api/images")
             .then((response) => response.json())
             .then((data) => {
                 setSwiperImages(data);
