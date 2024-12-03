@@ -96,7 +96,7 @@ class GoogleCallback(Resource):
                 'email': user_info['email'],
                 'username': user_info['name']
             }
-            return redirect("http://127.0.0.1:5173/admindashboard")
+            return redirect("/admindashboard")
         except Exception as e:
             return jsonify({"error": str(e)})
         
