@@ -11,7 +11,7 @@ with app.app_context():
     print('Seeding Admin Data...')
     admin = Admin(
         username="Admin",
-        email= "votiveent@gmail.com",
+        email= os.getenv('ADMIN_EMAIL'),
         password=bcrypt.generate_password_hash(os.getenv('PASSWORD')).decode('utf-8')
     )
     db.session.add(admin)
@@ -19,7 +19,7 @@ with app.app_context():
     
     dev = Admin(
         username="Dev",
-        email= "kkalvine4@gmail.com",
+        email= os.getenv('DEV_EMAIL'),
         password=bcrypt.generate_password_hash(os.getenv('PASSWORD')).decode('utf-8')
     )
     db.session.add(dev)
