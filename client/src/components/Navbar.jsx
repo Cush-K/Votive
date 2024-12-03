@@ -102,7 +102,7 @@ function Navbar() {
         {/* Admin section */}
         {pathname === "/admindashboard" && user && (
           <div className="admin-section">
-            <span>Welcome, {user.name || "Admin"}</span>
+            <span>Welcome, {user.username || "Admin"}</span>
             <button onClick={handleLogout}>Logout</button>
           </div>
         )}
