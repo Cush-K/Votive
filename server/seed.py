@@ -1,4 +1,4 @@
-from models import db, Admin
+from models import db, Admin, Message
 from app import app, bcrypt
 import os
 
@@ -6,13 +6,14 @@ with app.app_context():
     
     print('Clearing Database...')
     Admin.query.delete()
+    Message.query.delete()
     
 
     print('Seeding Admin Data...')
     admin = Admin(
         username="Admin",
-        email= 'votiveent@gmail.com', #os.getenv('ADMIN_EMAIL'),
-        password=bcrypt.generate_password_hash('&VotiVe2021').decode('utf-8')
+        email=  os.getenv('ADMIN_EMAIL'),
+        password=bcrypt.generate_password_hash(os.getenv('PASSWORD')).decode('utf-8')
     )
     db.session.add(admin)
     db.session.commit()

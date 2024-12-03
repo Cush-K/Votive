@@ -11,6 +11,7 @@ function Navbar() {
   const { user, setUser } = useAuth(); // Access user context
   const { pathname } = useLocation(); // Get current route
   const navigate = useNavigate(); // Navigation hook
+  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {
