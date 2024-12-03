@@ -13,7 +13,7 @@ const PrivateRoute = ({ element: Component, ...rest }) => {
     
     if (!user) {
         // If no user is logged in, redirect to the login page
-        return <Navigate to="/login" />;
+        return <Navigate to="/admin-login" />;
     }
 
     // If user is logged in, render the component
