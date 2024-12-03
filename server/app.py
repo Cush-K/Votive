@@ -1,4 +1,4 @@
-from flask import Flask, make_response, url_for, jsonify, session, redirect, request
+from flask import Flask, make_response, url_for, jsonify, session, redirect, request, send_from_directory
 from flask_migrate import Migrate
 from models import db, Customer, Admin, Message, Image, ScheduledJob
 from flask_restful import Resource, Api
@@ -8,18 +8,20 @@ from flask_cors import CORS
 from datetime import timedelta, datetime
 from dotenv import load_dotenv  # Import dotenv
 import os
+from twilio.rest import Client
 
 # Load .env variables
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../client/dist", static_url_path="")
 
 # Configurations
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = True
-app.config['SESSION_COOKIE_SECURE'] = False
+app.config['SESSION_COOKIE_SECURE'] = True
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.config['SESSION_PERMANENT'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
@@ -31,9 +33,40 @@ if not app.config['SECRET_KEY']:
 migrate = Migrate(app, db)
 api = Api(app)
 bcrypt = Bcrypt(app)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}})
+CORS(app, supports_credentials=True)
 
 db.init_app(app)
+
+
+@app.errorhandler(404)
+def not_found(e):
+    if request.path.startswith("/api/"):
+        return jsonify({"error": "Not found"}), 404
+    return send_from_directory(app.static_folder, "index.html")
+
+@app.route('/api')
+def index():
+    return '<h1>Index of Votive Laundry</h1>'
+
+# Environment Variables
+account_sid = os.getenv('TWILIO_ACCOUNT_SID')
+auth_token = os.getenv('TWILIO_AUTH_TOKEN')
+twilio_phone_number = os.getenv('TWILIO_PHONE_NUMBER')
+
+client = Client(account_sid, auth_token)
+
+def send_sms(to, message):
+    try:
+        message = client.messages.create(
+            body=message,
+            from_=twilio_phone_number,
+            to=to  # Recipient phone number
+        )
+        print(f"SMS sent successfully: {message.sid}")
+        return message.sid
+    except Exception as e:
+        print(f"Error sending SMS: {e}")
+        raise e
 
 # OAuth Configuration
 oauth = OAuth(app)
@@ -210,6 +243,12 @@ class Schedules(Resource):
             
             db.session.add(schedule)
             db.session.commit()
+            
+            # Send SMS notification
+            # phone_number = data['phone']
+            # sms_message = f"Hello {data['firstname']}, your order is scheduled for {parsed_date} at {parsed_time}."
+            # send_sms(phone_number, sms_message)
+            
             return schedule.to_dict(), 201
         
         except ValueError as ve:
@@ -232,5 +271,9 @@ api.add_resource(GoogleLogin, '/api/auth/google/login')
 api.add_resource(GoogleCallback, '/api/auth/google/callback', endpoint='google_callback')
 
 
-if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+# if __name__ == '__main__':
+#     app.run(port=5555, debug=True)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5555))
+    app.run(host="0.0.0.0", port=port)
