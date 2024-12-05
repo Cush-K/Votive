@@ -28,7 +28,7 @@ code {
   flex-direction: column;
   align-items: center;
   padding-top: 10px;
-  background-color: rgba(247, 244, 244, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .navbar.hidden {
@@ -202,7 +202,7 @@ code {
   background-image: url(/images/Hero.png);
   background-size: cover;
   background-position: center;
-  padding: 10px 0;
+  padding: 0;
 }
 
 .hero-header {
@@ -225,7 +225,6 @@ code {
   justify-content: space-around;
   width: 60vw;
   margin: 0 auto;
-  
 }
 
 /* Individual Hero Box */
@@ -1491,24 +1490,33 @@ button:disabled {
     display: flex; /* Show mobile socials in open menu */
   }
   .hero-header {
-    width: 98vw;
-    margin: 0 auto 40px auto;
+    width: 100vw;
+    margin: 0 auto 20px auto;
     text-align: center;
   }
   
   .hero-header h1 {
     font-size: 2em;
     font-style: italic;
-    margin: .5em 0;
+    margin: 0;
+    background-image: url(/images/Hero.png);
+    background-size:cover;
+    background-position: center top;
+    padding: 1.5em .5em;
+    color: #ffffff;
   }
   .hero-boxes {
     flex-direction: column;
-    width: 80vw;
+    align-items: center;
+    width: 100vw;
     gap: .5em;
   }
   .hero-box {
-    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
     height: 12em;
+    padding:15px 10px; 
   }
   .hero-box.hero-time span:first-child {
     width: 250px;
@@ -1574,18 +1582,24 @@ button:disabled {
   .footer-box1 h3,
   .footer-box2 h3,
   .footer-box3 h3{
-    font-style:italic;
+    font-style:normal;
+    font-weight: 700;
+  }
+  .footer-box1 p,
+  .footer-box2 p,
+  .footer-box3 p{
+    font-size: 12px;
   }
   .bot-footer {
     flex-direction: column;
   }
   
   .bot-footer svg {
-    font-size: 20px;
+    font-size: 15px;
   }
   
   .bot-footer p {
-    font-size: 12px;
+    font-size: 10px;
   }
   .about-hero {
     margin-top: 5em;
@@ -1707,7 +1721,38 @@ button:disabled {
   }
   .form-container{
     margin-top: 5em;
-    width: 100%;
+    width: 90%;
+  }
+  .form-page{
+    margin-bottom: 3em;
+  }
+  .form-page h1 {
+    padding: 1em 0;
+    font-size: 25px;
+  }
+  .form-row {
+    gap: .5rem;
+  }
+  .form-row input,.form-row select{
+    width: 20em;
+    font-size: 15px;
+  }
+  .full-width textarea, .full-width input, .full-width select{
+    font-size: 15px;
+  }
+}
+@media(max-width: 450px){
+  .hero-box.hero-time span:first-child {
+    width: 150px;  
+  }
+  
+  .hero-box.hero-time span:last-child {
+    width: 150px;
+    text-align: right;
+  }
+  .form-container{
+    margin-top: 5em;
+    width: 90%;
   }
   .form-page{
     margin-bottom: 3em;
@@ -1727,13 +1772,51 @@ button:disabled {
     font-size: 13px;
   }
 }
-@media(max-width: 450px){
-  .hero-box.hero-time span:first-child {
-    width: 150px;  
+@media(max-width: 400px){
+  .form-container{
+    margin-top: 4em;
+    width: 90%;
   }
-  
-  .hero-box.hero-time span:last-child {
-    width: 150px;
-    text-align: right;
+  .form-page{
+    margin-bottom: 3em;
+  }
+  .form-page h1 {
+    padding: 1em 0;
+    font-size: 17px;
+  }
+  .form-row {
+    gap: .3rem;
+  }
+  .form-row input,.form-row select{
+    width: 12.5em;
+    font-size: 12px;
+  }
+  .full-width textarea, .full-width input, .full-width select{
+    font-size: 12px;
+  }
+  .contact-container h1{
+    font-size: 30px;
+  }
+  .our-info{
+    width: 95%;
+    padding: 0;
+  }
+  .form{
+    width: 95%;
+    padding: 0;
+  }
+  .name-fields input,
+  .contact-fields input {
+    font-size:14px;
+    width: 13em;
+  }
+  textarea {
+    font-size:14px;
+  }
+  .our-info h3{
+    font-size: 15px;
+  }
+  .info-item.phone h3{
+    font-size: 30px;
   }
 }
