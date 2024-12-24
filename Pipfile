@@ -20,6 +20,7 @@ sqlalchemy-serializer = "==1.4.22"
 greenlet = "==3.1.1"
 flask = "==3.0.3"
 flask-oauthlib = "*"
+twilio = "*"
 authlib = "*"
 
 [dev-packages]
