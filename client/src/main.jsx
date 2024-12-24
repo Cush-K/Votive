@@ -11,7 +11,7 @@ const router = createBrowserRouter(routes)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SnackbarProvider maxSnack={3} autoHideDuration={10000} anchorOrigin={{ vertical: 'top', horizontal: 'center', }}>
+    <SnackbarProvider maxSnack={3} autoHideDuration={10000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
