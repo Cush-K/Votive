@@ -5,6 +5,10 @@ import { IoTrashOutline } from "react-icons/io5";
 import { useSnackbar } from "notistack";
 import UploadWidget from "./UploadWidget";
 
+useEffect(()=>{
+    document.title = 'Admin Dashboard'
+}, [])
+
 function AdminDash() {
     const [images, setImages] = useState([]);
     const [redirectLink, setRedirectLink] = useState(""); // To store the inputted redirect link
