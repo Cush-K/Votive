@@ -5,9 +5,6 @@ import { IoTrashOutline } from "react-icons/io5";
 import { useSnackbar } from "notistack";
 import UploadWidget from "./UploadWidget";
 
-useEffect(()=>{
-    document.title = 'Admin Dashboard'
-}, [])
 
 function AdminDash() {
     const [images, setImages] = useState([]);
@@ -15,6 +12,11 @@ function AdminDash() {
     const [uploadedImage, setUploadedImage] = useState(null); // To store the uploaded image details
     const { enqueueSnackbar } = useSnackbar();
     const [resetTrigger, setResetTrigger] = useState(false);
+
+
+    useEffect(() => {
+        document.title = 'Admin Dashboard | Votive Laundry and Dry Cleaning'
+    }, [])
 
     useEffect(() => {
         fetch("/api/images")
