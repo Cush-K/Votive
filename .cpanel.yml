@@ -2,6 +2,7 @@ deployment:
   tasks:
     # Step 1: Set the deployment path
     - export DEPLOYPATH=/home/votivela/public_html/votive
+    - mkdir -p $DEPLOYPATH
     - echo "Deployment path set to $DEPLOYPATH" >> /home/votivela/deploy.log
 
     # Step 2: Create the deployment directory if it doesn't exist
