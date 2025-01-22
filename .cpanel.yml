@@ -1,34 +1,20 @@
 deployment:
   tasks:
-    - echo "Starting deployment..."
-    - export DEPLOYPATH=/home/votivela/public_html/votive
-    - echo "Deployment path: $DEPLOYPATH"
-
-    # Create the static directory if it doesn't exist
-    - mkdir -p $DEPLOYPATH/static/
-    - echo "Created static directory."
-
-    # Copy server files
-    - echo "Copying server files..."
-    - /bin/cp -rf /home/votivela/repositories/votive/server/* $DEPLOYPATH/
-    - echo "Server files copied."
-
-    # Copy client build files
-    - echo "Copying client build files..."
-    - /bin/cp -rf /home/votivela/repositories/votive/client/dist/* $DEPLOYPATH/static/
-    - echo "Client build files copied."
-
-    # Activate virtual environment
-    - echo "Activating virtual environment..."
-    - source /home/votivela/virtualenv/votive/3.12/bin/activate
-    - echo "Virtual environment activated."
+    - export FLASK_APP=server/app.py
+    - export FLASK_ENV=production
 
     # Install Python dependencies
-    - echo "Installing Python dependencies..."
-    - pip install -r $DEPLOYPATH/requirements.txt
-    - echo "Dependencies installed."
+    - /usr/bin/python3 -m venv venv
+    - source venv/bin/activate && pip install -r requirements.txt
 
-    # Start Flask app
-    - echo "Starting Flask app..."
-    - gunicorn --chdir $DEPLOYPATH app:app
-    - echo "Flask app started."
+    # Install and build React (Vite) front-end
+    - cd client && npm install
+    - cd client && npm run build
+
+    # Move build files to public_html for hosting
+    - rm -rf ~/public_html/*
+    - cp -r client/dist/* ~/public_html/
+
+    # Restart the Flask server
+    - pkill -f gunicorn || true
+    - source venv/bin/activate && gunicorn --bind 0.0.0.0:5000 server.app:app --daemon
