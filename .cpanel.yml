@@ -10,10 +10,11 @@ deployment:
     - mkdir -p $DEPLOYPATH/static
     - echo "Created deployment directory at $DEPLOYPATH" >> $LOGFILE
 
-    # # Step 3: Build the React app (front-end)
-    # - cd /home/votivela/repositories/votive/client && npm install >> $LOGFILE 2>&1
-    # - cd /home/votivela/repositories/votive/client && npm run build >> $LOGFILE 2>&1
-    # - echo "React app built successfully" >> $LOGFILE
+    # Step 3: Build the React app (front-end)
+    - echo "Building React app at $DEPLOYPATH" >> $LOGFILE
+    - cd /home/votivela/repositories/votive/client && npm install >> $LOGFILE 2>&1
+    - cd /home/votivela/repositories/votive/client && npm run build >> $LOGFILE 2>&1
+    - echo "React app built successfully" >> $LOGFILE
 
     # # Step 4: Copy the React build files to the deployment directory
     # - /bin/cp -rf /home/votivela/repositories/votive/client/dist/* $DEPLOYPATH/static/ || echo "Failed to copy React build files" >> $LOGFILE
