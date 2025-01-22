@@ -1,20 +1,18 @@
+version: 2
 deployment:
   tasks:
-    - export FLASK_APP=server/app.py
-    - export FLASK_ENV=production
-
-    # Install Python dependencies
+    # Set up Python virtual environment
     - /usr/bin/python3 -m venv venv
     - source venv/bin/activate && pip install -r requirements.txt
 
-    # Install and build React (Vite) front-end
+    # Install Node.js dependencies and build frontend
     - cd client && npm install
     - cd client && npm run build
 
-    # Move build files to public_html for hosting
+    # Move built frontend to public_html directory
     - rm -rf ~/public_html/*
     - cp -r client/dist/* ~/public_html/
 
-    # Restart the Flask server
-    - pkill -f gunicorn || true
+    # Restart the Flask server using gunicorn
+    - source venv/bin/activate && pkill -f gunicorn || true
     - source venv/bin/activate && gunicorn --bind 0.0.0.0:5000 server.app:app --daemon
