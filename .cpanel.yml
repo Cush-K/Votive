@@ -1,9 +1,34 @@
 deployment:
   tasks:
-    - cd /home/votivela/public_html/votive/client
-    - npm install
-    - npm run build
-    - cd /home/votivela/public_html/votive
+    - echo "Starting deployment..."
+    - export DEPLOYPATH=/home/votivela/public_html/votive
+    - echo "Deployment path: $DEPLOYPATH"
+
+    # Create the static directory if it doesn't exist
+    - mkdir -p $DEPLOYPATH/static/
+    - echo "Created static directory."
+
+    # Copy server files
+    - echo "Copying server files..."
+    - /bin/cp -rf /home/votivela/repositories/votive/server/* $DEPLOYPATH/
+    - echo "Server files copied."
+
+    # Copy client build files
+    - echo "Copying client build files..."
+    - /bin/cp -rf /home/votivela/repositories/votive/client/dist/* $DEPLOYPATH/static/
+    - echo "Client build files copied."
+
+    # Activate virtual environment
+    - echo "Activating virtual environment..."
     - source /home/votivela/virtualenv/votive/3.12/bin/activate
-    - pip install -r requirements.txt
-    - gunicorn --chdir /home/votivela/public_html/votive app:app
+    - echo "Virtual environment activated."
+
+    # Install Python dependencies
+    - echo "Installing Python dependencies..."
+    - pip install -r $DEPLOYPATH/requirements.txt
+    - echo "Dependencies installed."
+
+    # Start Flask app
+    - echo "Starting Flask app..."
+    - gunicorn --chdir $DEPLOYPATH app:app
+    - echo "Flask app started."
