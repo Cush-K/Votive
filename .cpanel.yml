@@ -1,0 +1,9 @@
+deployment:
+  tasks:
+    - cd /home/votivela/public_html/votive/client
+    - npm install
+    - npm run build
+    - cd /home/votivela/public_html/votive
+    - source /home/votivela/virtualenv/votive/3.12/bin/activate
+    - pip install -r requirements.txt
+    - gunicorn --chdir /home/votivela/public_html/votive app:app
