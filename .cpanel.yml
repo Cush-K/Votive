@@ -1,40 +1,40 @@
 deployment:
   tasks:
     # Step 1: Set the deployment path
-    - export DEPLOYPATH=/home/youruser/public_html/myapp
-    - echo "Deployment path set to $DEPLOYPATH" >> /home/youruser/deploy.log
+    - export DEPLOYPATH=/home/votivela/public_html/votive
+    - echo "Deployment path set to $DEPLOYPATH" >> /home/votivela/deploy.log
 
     # Step 2: Create the deployment directory if it doesn't exist
     - mkdir -p $DEPLOYPATH/static
-    - echo "Created deployment directory at $DEPLOYPATH" >> /home/youruser/deploy.log
+    - echo "Created deployment directory at $DEPLOYPATH" >> /home/votivela/deploy.log
 
     # Step 3: Build the React app (front-end)
-    - cd /home/youruser/repositories/myapp/client && npm install >> /home/youruser/deploy.log 2>&1
-    - cd /home/youruser/repositories/myapp/client && npm run build >> /home/youruser/deploy.log 2>&1
-    - echo "React app built successfully" >> /home/youruser/deploy.log
+    - cd /home/votivela/repositories/votive/client && npm install >> /home/votivela/deploy.log 2>&1
+    - cd /home/votivela/repositories/votive/client && npm run build >> /home/votivela/deploy.log 2>&1
+    - echo "React app built successfully" >> /home/votivela/deploy.log
 
     # Step 4: Copy the React build files to the deployment directory
-    - /bin/cp -rf /home/youruser/repositories/myapp/client/dist/* $DEPLOYPATH/static/
-    - echo "React build files copied to $DEPLOYPATH/static/" >> /home/youruser/deploy.log
+    - /bin/cp -rf /home/votivela/repositories/votive/client/dist/* $DEPLOYPATH/static/
+    - echo "React build files copied to $DEPLOYPATH/static/" >> /home/votivela/deploy.log
 
     # Step 5: Copy the Flask backend files to the deployment directory
-    - /bin/cp -rf /home/youruser/repositories/myapp/server/* $DEPLOYPATH/
-    - echo "Flask backend files copied to $DEPLOYPATH" >> /home/youruser/deploy.log
+    - /bin/cp -rf /home/votivela/repositories/votive/server/* $DEPLOYPATH/
+    - echo "Flask backend files copied to $DEPLOYPATH" >> /home/votivela/deploy.log
 
     # Step 6: Copy the requirements.txt file to the deployment directory
-    - /bin/cp -rf /home/youruser/repositories/myapp/requirements.txt $DEPLOYPATH/
-    - echo "requirements.txt copied to $DEPLOYPATH" >> /home/youruser/deploy.log
+    - /bin/cp -rf /home/votivela/repositories/votive/requirements.txt $DEPLOYPATH/
+    - echo "requirements.txt copied to $DEPLOYPATH" >> /home/votivela/deploy.log
 
     # Step 7: Set up and activate the virtual environment
-    - if [ ! -d "/home/youruser/virtualenv/myapp/3.12" ]; then python3 -m venv /home/youruser/virtualenv/myapp/3.12; fi
-    - source /home/youruser/virtualenv/myapp/3.12/bin/activate
-    - echo "Virtual environment activated" >> /home/youruser/deploy.log
+    - if [ ! -d "/home/votivela/virtualenv/votive/3.12" ]; then python3 -m venv /home/votivela/virtualenv/votive/3.12; fi
+    - source /home/votivela/virtualenv/votive/3.12/bin/activate
+    - echo "Virtual environment activated" >> /home/votivela/deploy.log
 
     # Step 8: Install Python dependencies
-    - pip install -r $DEPLOYPATH/requirements.txt >> /home/youruser/deploy.log 2>&1
-    - echo "Python dependencies installed" >> /home/youruser/deploy.log
+    - pip install -r $DEPLOYPATH/requirements.txt >> /home/votivela/deploy.log 2>&1
+    - echo "Python dependencies installed" >> /home/votivela/deploy.log
 
     # Step 9: Restart the Flask app using Gunicorn
     - pkill -f gunicorn || true
     - gunicorn --chdir $DEPLOYPATH app:app --daemon
-    - echo "Flask app restarted with Gunicorn" >> /home/youruser/deploy.log
+    - echo "Flask app restarted with Gunicorn" >> /home/votivela/deploy.log
